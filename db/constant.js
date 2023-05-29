@@ -14,7 +14,6 @@ let env = {
     WEB_BASE_URL:process.env.WEB_BASE_URL,
     Logs:process.env.Logs,
     isAtlasUse:process.env.isAtlasUse,
-    isLocalTunnelRun:process.env.isLocalTunnelRun,
     ALREADY_EXIST:'Already Exist'
 }
 const statuses = [1,2,3] // ["Pending","Rejected","Verified"]

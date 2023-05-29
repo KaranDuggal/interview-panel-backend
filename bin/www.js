@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 /*global process*/
-const localtunnel = require('localtunnel');
 const {env}=require('../db/constant')
 var app = require('../app');
 var debug = require('debug')('backend:server');
@@ -90,16 +89,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log(`server running at ${port}`);
-}
-
-if(env.isLocalTunnelRun === 'true'){
-  const tunnel = localtunnel(port, { subdomain: 'italian-pizzeria'}, (err, tunnel) => {
-    if(err === null){
-      console.log(' ---------------------------------- Tunnel connect ---------------------------------- ');
-      console.log('URL:-', tunnel.url)
-    }
-  })
-  tunnel.on('close', function() {
-    tunnel.close();
-  });
 }
