@@ -1,0 +1,2 @@
+npm i cookie-parser debug express morgan bcryptjs cors dotenv-flow joi joi-objectid jsonwebtoken mongoose multer
+npm i bcryptjs cors dotenv-flow joi joi-objectid jsonwebtoken mongoose multer
