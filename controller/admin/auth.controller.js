@@ -36,5 +36,32 @@ module.exports = {
             next(err)
         }
     },
+    forgotPassword: async (req, res, next) => {
+        try {
+            let { value, error } = AdminValidator.forgotPassword(req.body);
+            if (error) throw error;
+            let data = await DbService.findOne(UserModel, {email:value.email,role:1})
+            if(data == null) throw badRequestErr(cmsMessages.USER_NOT_EXIST)
+            const forgotPasswordToken =await TokenService.create({_id: data._id},{})
+            await DbService.update(UserModel,{_id: data._id},{forgotPasswordToken})
+            return res.status(200).json({ success: true, message: cmsMessages.AUTH_FORGET_PASSWORD, data: data, forgotPasswordToken });
+        } catch (err) {
+            next(err)
+        }
+    },
+    setPassword: async (req, res, next) => {
+        try {
+            let { value, error } = AdminValidator.setPassword(req.body);
+            if (error) throw error;
+            let tokenData =await TokenService.decodedToken(value.token)
+            let data = await DbService.findById(UserModel, tokenData._id)
+            if(data == null) throw badRequestErr(cmsMessages.USER_NOT_EXIST)
+            if(data.forgotPasswordToken !== value.token) throw badRequestErr(cmsMessages.AUTH_INVALID_TOKEN)
+            await DbService.update(UserModel,{_id:data._id},{password:await bcryptjs.hash(value.password,10),forgotPasswordToken:''})
+            return res.status(200).json({ success: true, message: cmsMessages.AUTH_PASSWORD_SET, data: 1, });
+        } catch (err) {
+            next(err)
+        }
+    },
 }
 

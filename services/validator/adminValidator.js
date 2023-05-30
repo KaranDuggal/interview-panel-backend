@@ -19,5 +19,16 @@ module.exports = {
             role: Joi.number().valid(1).required(),
         }).validate(data);
     },
+    forgotPassword: (data) => {
+        return Joi.object({
+            email: Joi.string().trim().email().required(),
+        }).validate(data);
+    },
+    setPassword: (data) => {
+        return Joi.object({
+            token: Joi.string().required(),
+            password: Joi.string().min(6).max(30).required(),
+        }).validate(data);
+    },
 }
 

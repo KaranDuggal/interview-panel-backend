@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema({
         enum:roles,
         default:2,
     },
+    forgotPasswordToken: {
+        type:String,
+    },
     status: {
         type:Number,
         enum:statuses,
@@ -41,6 +44,12 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function (next) {
     this.password = await bcryptjs.hash(this.password,10)
     console.log('this', this)
+    next()
+})
+
+userSchema.pre('update', async function (next) {
+    this.password = await bcryptjs.hash(this.password,10)
+    console.log('-----------------------------------------------', this)
     next()
 })
 module.exports = mongoose.model('user', userSchema);

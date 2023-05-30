@@ -8,6 +8,12 @@ router.route('/signup')
 router.route('/login')
     .post(AuthController.login)
 
+router.route('/forgot-password')
+    .post(AuthController.forgotPassword)
+
+router.route('/set-password')
+    .post(AuthController.setPassword)
+
 
 
 module.exports = router;
