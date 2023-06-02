@@ -8,5 +8,5 @@ module.exports = {
     CommonFun : require('./commonFun'),
     // AwsService : require('./aws.services'),
     // QrcodeService : require('./qrcode.service'),
-    // MailService: require('./mail.service')
+    MailService: require('./mail.service')
 }

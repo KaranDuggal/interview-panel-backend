@@ -5,13 +5,14 @@ let env = {
     //ENV File
     NODE_ENV: process.env.NODE_ENV,
     JWT_SECRET: process.env.JWT_SECRET,
-    EmailId: process.env.EmailId,
-    EmailPassword: process.env.EmailPassword,
+    SEND_GRID_EMAIL_ID: process.env.SEND_GRID_EMAIL_ID,
+    SEND_GRID_EMAIL_PASS: process.env.SEND_GRID_EMAIL_PASS,
+    SEND_GRID_KEY: process.env.SEND_GRID_KEY,
     DB_HOST: process.env.DB_HOST,
     DB_USER: process.env.DB_USER,
     DB_PASSWORD: process.env.DB_PASSWORD,
     DB_NAME: process.env.DB_NAME,
-    WEB_BASE_URL:process.env.WEB_BASE_URL,
+    FRONTEND_BASE_URL:process.env.FRONTEND_BASE_URL,
     Logs:process.env.Logs,
     isAtlasUse:process.env.isAtlasUse,
     ALREADY_EXIST:'Already Exist'

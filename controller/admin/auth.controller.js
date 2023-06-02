@@ -1,8 +1,9 @@
 /*global badRequestErr*/
-const { DbService, AdminValidator, TokenService } = require('../../services');
+const { DbService, AdminValidator, TokenService, MailService } = require('../../services');
 const { UserModel } = require('../../models');
 const bcryptjs = require('bcryptjs')
 const cmsMessages = require('../../db/messages/cms.messages');
+const { env } = require('../../db/constant');
 
 module.exports = {
     signup: async (req, res, next) => {
@@ -44,6 +45,8 @@ module.exports = {
             if(data == null) throw badRequestErr(cmsMessages.USER_NOT_EXIST)
             const forgotPasswordToken =await TokenService.create({_id: data._id},{})
             await DbService.update(UserModel,{_id: data._id},{forgotPasswordToken})
+            const htmlTemplate = `To set password <a href="${env.FRONTEND_BASE_URL}auth/forgot-password">Click here</a>`
+            await MailService.send(data.email,'Forgot password mail',htmlTemplate);
             return res.status(200).json({ success: true, message: cmsMessages.AUTH_FORGET_PASSWORD, data: data, forgotPasswordToken });
         } catch (err) {
             next(err)

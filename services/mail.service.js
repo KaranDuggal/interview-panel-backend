@@ -1,26 +1,24 @@
 const sgMail = require('@sendgrid/mail')
 const { env } = require('../db/constant')
 
-const API_KEY = ('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')
+const API_KEY = (env.SEND_GRID_KEY)
 
 sgMail.setApiKey(API_KEY)
 module.exports = {
-    send: () => {
+    send: (to,subject,htmlTemplate) => {
         const message = {
-            to: "test11@yopmail.com",
+            to: to,
             from: {
                 Name: "POPT",
-                Email: env.Email
+                Email: env.SEND_GRID_EMAIL_ID
             },
-            subject: "hello from sendgrid",
-            text: "hello world 88899999999",
-            html: '<h1>Hello World</h1>'
-
+            subject: subject,
+            html: htmlTemplate
         }
         sgMail.send(message)
             // eslint-disable-next-line no-unused-vars
             .then((response) => console.log("Email sent"))
             // eslint-disable-next-line no-unused-vars
-            .catch((error) => console.log("error......."))
+            .catch((error) => console.log("Mail Error.......",error))
     }
 }
