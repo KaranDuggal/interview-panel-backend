@@ -29,11 +29,11 @@ if(env.Logs === 'true'){
     app.use(logger(colors.green(':method '+colors.yellow(':url')+' :status :response-time ms - :res[content-length] ' +colors.blue(':body')+' - :req[content-length]')));
 }
 
-const cmsPath = './dist/tattoo-admin/';
-app.use(express.static(path.join(__dirname, cmsPath)));
-app.use(/^((?!(api|images)).)*/, (req, res) => {
-    res.sendFile(path.join(__dirname, cmsPath + 'index.html'));
-});
+// const cmsPath = './dist/tattoo-admin/';
+// app.use(express.static(path.join(__dirname, cmsPath)));
+// app.use(/^((?!(api|images)).)*/, (req, res) => {
+//     res.sendFile(path.join(__dirname, cmsPath + 'index.html'));
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

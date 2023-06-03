@@ -17,7 +17,7 @@ let env = {
     ALREADY_EXIST:'Already Exist'
 }
 const statuses = [1,2,3] // ["Pending","Rejected","Verified"]
-const roles = [1,2] // ["admin","user"]
+const roles = [1,2] // ["admin","Hr"]
 const models = ['tag','product']
 module.exports = {env,statuses,roles,models};
 // module.exports = status;
