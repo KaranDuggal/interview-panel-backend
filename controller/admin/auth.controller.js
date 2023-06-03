@@ -45,7 +45,7 @@ module.exports = {
             if(data == null) throw badRequestErr(cmsMessages.USER_NOT_EXIST)
             const forgotPasswordToken =await TokenService.create({_id: data._id},{})
             await DbService.update(UserModel,{_id: data._id},{forgotPasswordToken})
-            const htmlTemplate = `To set password <a href="${env.FRONTEND_BASE_URL}auth/forgot-password">Click here</a>`
+            const htmlTemplate = `To set password <a href="${env.FRONTEND_BASE_URL}auth/forgot-password/${forgotPasswordToken}">Click here</a>`
             await MailService.send(data.email,'Forgot password mail',htmlTemplate);
             return res.status(200).json({ success: true, message: cmsMessages.AUTH_FORGET_PASSWORD, data: data, forgotPasswordToken });
         } catch (err) {
